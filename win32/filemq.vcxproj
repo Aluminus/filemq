@@ -45,8 +45,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>.\</OutDir>
-    <IntDir>.\</IntDir>
+    <OutDir>$(OutDir)</OutDir>
+    <IntDir>$(OutDir)</IntDir>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -103,8 +103,10 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <OutputFile>
-      </OutputFile>
+      <OutputFile>$(TargetPath)</OutputFile>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>ssleay32MT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\OpenSSL-Win32\lib\VC\static;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -114,6 +116,7 @@
     <ClCompile Include="..\src\fmq_config.c" />
     <ClCompile Include="..\src\fmq_dir.c" />
     <ClCompile Include="..\src\fmq_file.c" />
+    <ClCompile Include="..\src\fmq_hash.c" />
     <ClCompile Include="..\src\fmq_msg.c" />
     <ClCompile Include="..\src\fmq_patch.c" />
     <ClCompile Include="..\src\fmq_sasl.c" />
@@ -126,6 +129,7 @@
     <ClInclude Include="..\include\fmq_config.h" />
     <ClInclude Include="..\include\fmq_dir.h" />
     <ClInclude Include="..\include\fmq_file.h" />
+    <ClInclude Include="..\include\fmq_hash.h" />
     <ClInclude Include="..\include\fmq_msg.h" />
     <ClInclude Include="..\include\fmq_patch.h" />
     <ClInclude Include="..\include\fmq_sasl.h" />

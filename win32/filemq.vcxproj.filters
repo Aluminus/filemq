@@ -31,6 +31,9 @@
     <ClCompile Include="..\src\fmq_sasl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\fmq_hash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\fmq.h">
@@ -61,6 +64,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\fmq_server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fmq_hash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
