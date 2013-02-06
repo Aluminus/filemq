@@ -30,6 +30,10 @@
 extern "C" {
 #endif
 
+#if (defined (__WINDOWS__))
+#define strcasecmp _stricmp
+#endif
+
 //  Opaque class structure
 typedef struct _fmq_server_t fmq_server_t;
 

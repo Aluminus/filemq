@@ -55,7 +55,7 @@ fmq_file_new (const char *path, const char *name)
     fmq_file_t *self = (fmq_file_t *) zmalloc (sizeof (fmq_file_t));
     
     //  Format full path to file
-    self->name = malloc (strlen (path) + strlen (name) + 2);
+    self->name = (char*)malloc (strlen (path) + strlen (name) + 2);
     sprintf (self->name, "%s/%s", path, name);
 
     //  Resolve symbolic link if necessary
@@ -379,7 +379,7 @@ fmq_file_hash (fmq_file_t *self)
 
     //  Convert to printable string
     char hex_char [] = "0123456789ABCDEF";
-    char *hashstr = zmalloc (fmq_hash_size (hash) * 2 + 1);
+    char *hashstr = (char*)zmalloc (fmq_hash_size (hash) * 2 + 1);
     int byte_nbr;
     for (byte_nbr = 0; byte_nbr < fmq_hash_size (hash); byte_nbr++) {
         hashstr [byte_nbr * 2 + 0] = hex_char [fmq_hash_data (hash) [byte_nbr] >> 4];

@@ -97,7 +97,7 @@ fmq_dir_new (const char *path, const char *parent)
 {
     fmq_dir_t *self = (fmq_dir_t *) zmalloc (sizeof (fmq_dir_t));
     if (parent) {
-        self->path = malloc (strlen (path) + strlen (parent) + 2);
+        self->path = (char*)malloc (strlen (path) + strlen (parent) + 2);
         sprintf (self->path, "%s/%s", parent, path);
     }
     else
@@ -118,7 +118,7 @@ fmq_dir_new (const char *path, const char *parent)
         self->path [strlen (self->path) - 1] = 0;
     
     //  Win32 wants a wildcard at the end of the path
-    char *wildcard = malloc (strlen (self->path) + 3);
+    char *wildcard = (char*)malloc (strlen (self->path) + 3);
     sprintf (wildcard, "%s/*", self->path);
     WIN32_FIND_DATA entry;
     HANDLE handle = FindFirstFile (wildcard, &entry);
@@ -267,21 +267,21 @@ fmq_dir_diff (fmq_dir_t *older, fmq_dir_t *newer, char *alias)
     //  is rather trivial
     while (old_files [old_index] || new_files [new_index]) {
         fmq_file_t *old = old_files [old_index];
-        fmq_file_t *new = new_files [new_index];
+        fmq_file_t *newFile = new_files [new_index];
 
         int cmp;
         if (!old)
             cmp = 1;        //  Old file was deleted at end of list
         else
-        if (!new)
+        if (!newFile)
             cmp = -1;       //  New file was added at end of list
         else
-            cmp = strcmp (fmq_file_name (old, NULL), fmq_file_name (new, NULL));
+            cmp = strcmp (fmq_file_name (old, NULL), fmq_file_name (newFile, NULL));
 
         if (cmp > 0) {
             //  New file was created
-            if (fmq_file_stable (new))
-                zlist_append (patches, fmq_patch_new (newer->path, new, patch_create, alias));
+            if (fmq_file_stable (newFile))
+                zlist_append (patches, fmq_patch_new (newer->path, newFile, patch_create, alias));
             old_index--;
         }
         else
@@ -292,18 +292,18 @@ fmq_dir_diff (fmq_dir_t *older, fmq_dir_t *newer, char *alias)
             new_index--;
         }
         else
-        if (cmp == 0 && fmq_file_stable (new)) {
+        if (cmp == 0 && fmq_file_stable (newFile)) {
             if (fmq_file_stable (old)) {
                 //  Old file was modified or replaced
                 //  Since we don't check file contents, treat as created
                 //  Could better do SHA check on file here
-                if (fmq_file_time (new) != fmq_file_time (old)
-                ||  fmq_file_size (new) != fmq_file_size (old))
-                    zlist_append (patches, fmq_patch_new (newer->path, new, patch_create, alias));
+                if (fmq_file_time (newFile) != fmq_file_time (old)
+                ||  fmq_file_size (newFile) != fmq_file_size (old))
+                    zlist_append (patches, fmq_patch_new (newer->path, newFile, patch_create, alias));
             }
             else
                 //  File was created over some period of time
-                zlist_append (patches, fmq_patch_new (newer->path, new, patch_create, alias));
+                zlist_append (patches, fmq_patch_new (newer->path, newFile, patch_create, alias));
         }
         old_index++;
         new_index++;
@@ -467,7 +467,7 @@ fmq_dir_cache (fmq_dir_t *self)
     //  Load any previous cache from disk
     zhash_t *cache = zhash_new ();
     zhash_autofree (cache);
-    char *cache_file = malloc (strlen (self->path) + strlen ("/.cache") + 1);
+    char *cache_file = (char*)malloc (strlen (self->path) + strlen ("/.cache") + 1);
     sprintf (cache_file, "%s/.cache", self->path);
     zhash_load (cache, cache_file);
 

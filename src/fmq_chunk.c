@@ -31,7 +31,12 @@ struct _fmq_chunk_t {
     size_t size;                //  Current size of data part
     size_t max_size;            //  Maximum allocated size
     byte  *data;                //  Data part follows here
-} __attribute__ ((aligned (8)));
+}
+#if (!defined (__WINDOWS__))
+__attribute__ ((aligned (8)));
+#else
+;
+#endif
 
 
 //  --------------------------------------------------------------------------
@@ -84,7 +89,7 @@ fmq_chunk_resize (fmq_chunk_t *self, size_t size)
     if (self->data != (byte *) self + sizeof (fmq_chunk_t))
         free (self->data);
 
-    self->data = zmalloc (size);
+    self->data = (byte*)zmalloc (size);
     self->max_size = size;
     self->size = 0;
 }

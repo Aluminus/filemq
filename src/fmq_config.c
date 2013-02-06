@@ -140,7 +140,7 @@ fmq_config_value_set (fmq_config_t *self, const char *value)
 char *
 fmq_config_value_format (fmq_config_t *self, const char *format, ...)
 {
-    char *value = malloc (255 + 1);
+    char *value = (char*)malloc (255 + 1);
     va_list args;
     assert (self);
     va_start (args, format);
@@ -182,7 +182,7 @@ fmq_config_t *
 fmq_config_locate (fmq_config_t *self, const char *path)
 {
     //  Check length of next path segment
-    char *slash = strchr (path, '/');
+    char *slash = (char*)strchr (path, '/');
     int length = strlen (path);
     if (slash)
         length = slash - path;
@@ -223,7 +223,7 @@ void
 fmq_config_path_set (fmq_config_t *self, const char *path, const char *value)
 {
     //  Check length of next path segment
-    char *slash = strchr (path, '/');
+    char *slash = (char*)strchr (path, '/');
     int length = strlen (path);
     if (slash)
         length = slash - path;

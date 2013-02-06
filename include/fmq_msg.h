@@ -26,6 +26,8 @@
 #ifndef __FMQ_MSG_H_INCLUDED__
 #define __FMQ_MSG_H_INCLUDED__
 
+#include <stdint.h>
+
 /*  These are the fmq_msg messages
     OHAI - Client opens peering
         protocol      string
