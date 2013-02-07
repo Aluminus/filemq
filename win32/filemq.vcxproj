@@ -54,8 +54,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\filemq\include;..\..\czmq\include;C:\Program Files\ZeroMQ 3.2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>
@@ -64,7 +63,7 @@
       <PrecompiledHeaderOutputFile>./libfilemq.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>./</AssemblerListingLocation>
       <ObjectFileName>./</ObjectFileName>
-      <ProgramDataBaseFileName>./</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>./filemq_d.pdb</ProgramDataBaseFileName>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -73,8 +72,8 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <OutputFile>.\filemq.lib</OutputFile>
-      <AdditionalDependencies>czmq.lib</AdditionalDependencies>
+      <OutputFile>.\filemq_d.lib</OutputFile>
+      <AdditionalDependencies>czmq_d.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\czmq\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
@@ -108,6 +107,9 @@
       <AdditionalDependencies>ssleay32MT.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files\OpenSSL-Win32\lib\VC\static;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\filemq.c" />
