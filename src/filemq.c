@@ -55,7 +55,7 @@ int main (int argc, char *argv [])
     fmq_client_subscribe (client, "/");
     fmq_client_connect (client, "tcp://localhost:5670");
     
-    while (!zctx_interrupted)
+    while (!zctx_interrupted())
         zclock_sleep (1000);
     puts ("interrupted");
 

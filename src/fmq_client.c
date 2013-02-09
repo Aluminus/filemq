@@ -825,7 +825,7 @@ client_thread (void *args, zctx_t *ctx, void *pipe)
     zmq_pollitem_t pollset [MAX_SERVERS] = {
         { self->pipe, 0, ZMQ_POLLIN, 0 }
     };
-    while (!self->stopped && !zctx_interrupted) {
+    while (!self->stopped && !zctx_interrupted()) {
         //  Rebuild pollset if we need to
         int server_nbr;
         if (self->dirty) {
