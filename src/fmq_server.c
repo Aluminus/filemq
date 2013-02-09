@@ -1172,7 +1172,7 @@ server_thread (void *args, zctx_t *ctx, void *pipe)
         { self->router, 0, ZMQ_POLLIN, 0 }
     };
     self->monitor_at = zclock_time () + self->monitor;
-    while (!self->stopped && !zctx_interrupted()) {
+    while (!self->stopped && !zctx_is_interrupted()) {
         //  Calculate tickless timer, up to interval seconds
         uint64_t tickless = zclock_time () + self->monitor;
         zhash_foreach (self->clients, client_tickless, &tickless);

@@ -60,7 +60,7 @@ int main (int argc, char *argv [])
         fmq_server_publish (server, "./fmqroot/logs", "/logs");
         //  We do this last
         fmq_server_bind (server, "tcp://*:5670");
-        while (!zctx_interrupted)
+        while (!zctx_is_interrupted)
             zclock_sleep (1000);
         fmq_server_destroy (&server);
     }

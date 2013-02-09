@@ -73,7 +73,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <OutputFile>$(TargetFileName)</OutputFile>
+      <OutputFile>$(Configuration)\$(TargetFileName)</OutputFile>
       <AdditionalDependencies>czmq_d.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files\ZeroMQ 3.2.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
